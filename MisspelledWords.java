@@ -1,3 +1,5 @@
+package spellchecker;
+
 import java.util.*;
 
 /**************

@@ -1,4 +1,5 @@
 import java.io.File;
+import java.util.ArrayList;
 import javax.swing.JFileChooser;
 
 /*
@@ -32,7 +33,8 @@ public class FilePicker extends javax.swing.JFrame {
     private void initComponents() {
 
         OpenFile = new javax.swing.JButton();
-        DisplayBox = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        DisplayBox = new javax.swing.JTextPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -43,7 +45,8 @@ public class FilePicker extends javax.swing.JFrame {
             }
         });
 
-        DisplayBox.setText("File Name");
+        DisplayBox.setEditable(false);
+        jScrollPane1.setViewportView(DisplayBox);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -52,20 +55,20 @@ public class FilePicker extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(198, 198, 198)
                 .addComponent(OpenFile)
-                .addContainerGap(190, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(DisplayBox, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(59, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(60, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(OpenFile)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 151, Short.MAX_VALUE)
-                .addComponent(DisplayBox, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(80, 80, 80))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -77,7 +80,12 @@ public class FilePicker extends javax.swing.JFrame {
         int returnVal = choose.showOpenDialog(FilePicker.this);
         File file = choose.getSelectedFile();
         filename = file.getAbsolutePath();
-        DisplayBox.setText(filename);
+        ArrayList<String> words = SpellChecker.getText(filename);
+        String text = "";
+        for(String word : words){
+            text = text + " " + word;
+        }
+        DisplayBox.setText(text);
     }//GEN-LAST:event_OpenFileActionPerformed
 
     /**
@@ -114,7 +122,8 @@ public class FilePicker extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel DisplayBox;
+    private javax.swing.JTextPane DisplayBox;
     private javax.swing.JButton OpenFile;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }
