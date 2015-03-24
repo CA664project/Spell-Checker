@@ -1,3 +1,5 @@
+package spellchecker;
+
 
 public class SimpleSpellCheck {
 	public static void main (String[] args){
